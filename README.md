@@ -1,2 +1,2 @@
-# journey-native
+# JourneyNative
 Mobile frontend for the Journey app
