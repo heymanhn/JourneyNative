@@ -16,8 +16,11 @@ class JourneyNative extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to the Journey app!
+        <Text style={styles.title}>
+          Journey
+        </Text>
+        <Text style={styles.tagline}>
+          Realize your dreams
         </Text>
       </View>
     );
@@ -29,14 +32,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ffe945',
   },
-  welcome: {
-    fontSize: 20,
+  title: {
+    fontSize: 48,
+    fontWeight: '200',
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  tagline: {
+    fontSize: 24,
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
