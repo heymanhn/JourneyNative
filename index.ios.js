@@ -22,7 +22,7 @@ class JourneyNative extends Component {
             Journey
           </Text>
           <Text style={styles.tagline}>
-            Realize your dreams
+            Amazing trip plans
           </Text>
         </View>
         <View style={styles.buttons}>
