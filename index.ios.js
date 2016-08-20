@@ -6,74 +6,59 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  NavigationExperimental
 } from 'react-native';
-import Button from 'react-native-button';
+import JourneyNavigator from './JourneyNavigator';
+
+const {
+  StateUtils: NavigationStateUtils
+} = NavigationExperimental;
 
 class JourneyNative extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      navigationState: {
+        index: 0,
+        routes: [{key: 'Intro'}],
+      },
+    };
+
+    this._onNavigationChange = this._onNavigationChange.bind(this);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.titles}>
-          <Text style={styles.title}>
-            Journey
-          </Text>
-          <Text style={styles.tagline}>
-            Amazing trip plans
-          </Text>
-        </View>
-        <View style={styles.buttons}>
-          <Button style={styles.button}>
-            Sign up
-          </Button>
-          <Button style={styles.button}>
-            Log in
-          </Button>
-        </View>
+     <JourneyNavigator
+       navigationState={this.state.navigationState}
+       onNavigationChange={this._onNavigationChange}
+     />
+   );
+  }
 
-      </View>
-    );
+  _onNavigationChange(type: string): void {
+    let {navigationState} = this.state;
+
+    switch (type) {
+     case 'push':
+       const route = {key: 'route-' + Date.now()}; // Change later
+       navigationState = NavigationStateUtils.push(navigationState, route);
+       break;
+
+     case 'pop':
+       navigationState = NavigationStateUtils.pop(navigationState);
+       break;
+    }
+
+    if (this.state.navigationState !== navigationState) {
+      this.setState({navigationState});
+    }
+  }
+
+  handleBackAction(): boolean {
+    return this._onNavigationChange('pop');
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffe945',
-  },
-  titles: {
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  title: {
-    fontSize: 48,
-    fontWeight: '200',
-    textAlign: 'center',
-    margin: 10
-  },
-  tagline: {
-    fontSize: 24,
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  },
-  buttons: {
-    flex: 1,
-    marginTop: 50
-  },
-  button: {
-    width: 150,
-    borderWidth: 2,
-    padding: 10,
-    fontWeight: '100',
-    color: '#333333',
-    fontSize: 18,
-    margin: 10
-  }
-});
 
 AppRegistry.registerComponent('JourneyNative', () => JourneyNative);
