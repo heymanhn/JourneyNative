@@ -5,7 +5,7 @@ import { loginSaveEmail, navigatePush } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
-		email: state.login.email
+		email: state.authentication.email
 	}
 }
 

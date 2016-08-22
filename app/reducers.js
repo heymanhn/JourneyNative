@@ -17,7 +17,8 @@ import {
   NAV_RESET,
   LOGIN_SAVE_EMAIL,
   LOGIN_SAVE_PASSWORD,
-  LOGIN_SUBMIT
+  LOGIN_SUBMIT,
+  LOGOUT
 } from './actions'
 
 function navigationState(state = initialNavState, action) {
@@ -41,32 +42,28 @@ function navigationState(state = initialNavState, action) {
   		return NavigationStateUtils.jumpToIndex(state, action.index)
 
     case NAV_RESET:
-      return {
-  			...state,
-  			index: action.index,
-  			routes: action.routes
-  		}
+      return NavigationStateUtils.reset(state, action.routes, action.index)
 
   	default:
   		return state
   }
 }
 
-function login(state = {}, action) {
+function authentication(state = {}, action) {
   switch (action.type) {
     case LOGIN_SAVE_EMAIL:
       return { ...state, email: action.email }
     case LOGIN_SAVE_PASSWORD:
       return { ...state, password: action.password }
-    case LOGIN_SUBMIT:
-      break;
+    case LOGOUT:
+      return {}
   }
   return state
 }
 
 const appReducers = combineReducers({
 	navigationState,
-  login
+  authentication
 })
 
 export default appReducers

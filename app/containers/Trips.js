@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import TripsScreen from '../components/TripsScreen'
-import { navigateReset } from '../actions'
+import { logout, navigateReset } from '../actions'
 import { initialNavState } from '../constants'
 
 const mapStateToProps = (state) => {
@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onLogoutPress: () => {
+			dispatch(logout())
 			dispatch(navigateReset(initialNavState.index, initialNavState.routes))
 		}
 	}

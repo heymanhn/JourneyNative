@@ -9,6 +9,7 @@ export const NAV_RESET = 'NAV_RESET'
 export const LOGIN_SAVE_EMAIL = 'LOGIN_SAVE_EMAIL'
 export const LOGIN_SAVE_PASSWORD = 'LOGIN_SAVE_PASSWORD'
 export const LOGIN_SUBMIT = 'LOGIN_SUBMIT'
+export const LOGOUT = 'LOGOUT'
 
 // Navigation Action Creators
 export function navigatePush(key, next) {
@@ -68,5 +69,11 @@ export function loginSubmit(password) {
   return {
     type: LOGIN_SUBMIT,
     password
+  }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT
   }
 }

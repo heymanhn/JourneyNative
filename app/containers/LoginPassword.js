@@ -5,7 +5,7 @@ import { loginSavePassword, loginSubmit, navigateReset } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
-		password: state.login.password
+		password: state.authentication.password
 	}
 }
 

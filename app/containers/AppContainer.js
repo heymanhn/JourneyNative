@@ -18,36 +18,28 @@ import Trips from './Trips'
 import { navigatePush, navigatePop, navigateReset } from '../actions'
 
 const {
-	Transitioner: NavigationTransitioner,
+	CardStack: NavigationCardStack,
 	Card: NavigationCard,
 	Header: NavigationHeader
 } = NavigationExperimental
 
 class AppContainer extends Component {
 	render() {
-		let { navigationState, backAction } = this.props
+		let { navigationState } = this.props
 
 		return (
-			<NavigationTransitioner
+			<NavigationCardStack
 				navigationState={navigationState}
-				style={styles.container}
-				render={props => (
-					<View style={styles.container}>
-						<NavigationCard
-							{...props}
-							onNavigateBack={backAction}
-							renderScene={this.renderScene}
-							key={props.scene.route.key}
-						/>
-						<NavigationHeader
-							{...props}
-							style={styles.header}
-							onNavigateBack={backAction}
-							renderLeftComponent={this.renderBackButtonComponent}
-							renderRightComponent={this.renderNextButtonComponent.bind(this)}
-						/>
-					</View>
+				renderOverlay={props => (
+					<NavigationHeader
+						{...props}
+						style={styles.header}
+						renderLeftComponent={this.renderBackButtonComponent.bind(this)}
+						renderRightComponent={this.renderNextButtonComponent.bind(this)}
+					/>
 				)}
+				renderScene={this.renderScene}
+				style={styles.container}
 			/>
 		)
 	}
@@ -68,7 +60,7 @@ class AppContainer extends Component {
 	}
 
 	renderBackButtonComponent(props) {
-		if (props.scene.index === 0 || !props.onNavigateBack) {
+		if (props.scene.index === 0 || props.scene.route.key === 'Trips') {
 			return null
 		}
 
@@ -76,7 +68,7 @@ class AppContainer extends Component {
 			<TouchableHighlight
 				activeOpacity={0.5}
 				underlayColor={'#ffe945'}
-				onPress={props.onNavigateBack}
+				onPress={this.props.backAction}
 			>
 				<Image
 					source={require('../assets/back-button.png')}
@@ -98,7 +90,7 @@ class AppContainer extends Component {
 				case 'LoginPassword':
 					return this.props.pushAction(next, 'Trips')
 				case 'Trips':
-					return this.props.resetAction([{ key: 'Trips' }])
+					return this.props.pushAction(next)
 				default:
 					return null
 			}
@@ -121,8 +113,7 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
 	navigationState: PropTypes.object,
 	backAction: PropTypes.func.isRequired,
-	pushAction: PropTypes.func.isRequired,
-	resetAction: PropTypes.func.isRequired
+	pushAction: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -152,9 +143,6 @@ export default connect(
 		},
 		pushAction: (key, next) => {
 			dispatch(navigatePush(key, next))
-		},
-		resetAction: (routes) => {
-			dispatch(navigateReset(0, routes))
 		}
 	})
 )(AppContainer)
