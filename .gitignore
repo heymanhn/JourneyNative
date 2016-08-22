@@ -38,3 +38,6 @@ jspm_packages
 
 # OSX artifacts
 .DS_Store
+
+# XCode artifacts
+ios/JourneyNative.xcodeproj/project.xcworkspace/xcuserdata/heymanhn.xcuserdatad/UserInterfaceState.xcuserstate
