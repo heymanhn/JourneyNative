@@ -10,14 +10,6 @@ import {
 import Button from 'react-native-button'
 
 class LoginEmailScreen extends Component {
-  constructor(props, context) {
-    super(props, context)
-
-    this.state = {
-      email: ''
-    }
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -35,7 +27,7 @@ class LoginEmailScreen extends Component {
             onChangeText={(text) => this.props.onEnterEmail(text)}
             onSubmitEditing={this.props.onSubmitPress}
             returnKeyType='next'
-            value={this.props.email}
+            defaultValue={this.props.email}
           />
         </View>
       </View>

@@ -5,7 +5,7 @@ import { loginSaveEmail, navigatePush } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
-		email: state.email // Something is not right here
+		email: state.login.email
 	}
 }
 

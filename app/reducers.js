@@ -55,9 +55,9 @@ function navigationState(state = initialNavState, action) {
 function login(state = {}, action) {
   switch (action.type) {
     case LOGIN_SAVE_EMAIL:
-      return state.email ? { ...state, email } : state
+      return { ...state, email: action.email }
     case LOGIN_SAVE_PASSWORD:
-      return state.password ? { ...state, password } : state
+      return { ...state, password: action.password }
     case LOGIN_SUBMIT:
       break;
   }

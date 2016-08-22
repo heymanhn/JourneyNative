@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 
 import LoginPasswordScreen from '../components/LoginPasswordScreen'
-import { loginSubmit, navigateReset } from '../actions'
+import { loginSavePassword, loginSubmit, navigateReset } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
-		password: state.password
+		password: state.login.password
 	}
 }
 
