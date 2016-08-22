@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(loginSaveEmail(email))
 		},
 		onSubmitPress: () => {
-			dispatch(navigatePush('LoginPassword', 'form'))
+			dispatch(navigatePush('LoginPassword', 'Trips'))
 		}
 	}
 }

@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		onSubmitPress: () => {
 			dispatch(loginSubmit())
-			dispatch(navigateReset(0, [{ key: 'Trips', type: 'screen' }]))
+			dispatch(navigateReset(0, [{ key: 'Trips' }]))
 		}
 	}
 }

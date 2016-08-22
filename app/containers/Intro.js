@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onLoginPress: () => {
-			dispatch(navigatePush('LoginEmail', 'form'))
+			dispatch(navigatePush('LoginEmail', 'LoginPassword'))
 		}
 	}
 }

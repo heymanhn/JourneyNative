@@ -15,7 +15,7 @@ import Intro from './Intro'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
 import Trips from './Trips'
-import { navigatePush, navigatePop } from '../actions'
+import { navigatePush, navigatePop, navigateReset } from '../actions'
 
 const {
 	Transitioner: NavigationTransitioner,
@@ -87,17 +87,28 @@ class AppContainer extends Component {
 	}
 
 	renderNextButtonComponent(props) {
-		if (props.scene.route.type !== 'form') {
+		let next = props.scene.route.next
+
+		if (!next) {
 			return null
 		}
 
-		let key = props.scene.route.key === 'LoginEmail' ? 'LoginPassword' : 'Trips';
+		let onPressAction = () => {
+			switch (next) {
+				case 'LoginPassword':
+					return this.props.pushAction(next, 'Trips')
+				case 'Trips':
+					return this.props.resetAction([{ key: 'Trips' }])
+				default:
+					return null
+			}
+		}
 
 		return (
 			<TouchableHighlight
 				activeOpacity={1.0}
 				underlayColor={'#ffe945'}
-				onPress={() => this.props.pushAction(key, 'form')}
+				onPress={onPressAction}
 			>
    			<Text style={styles.nextButton}>
       		Next
@@ -110,7 +121,8 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
 	navigationState: PropTypes.object,
 	backAction: PropTypes.func.isRequired,
-	pushAction: PropTypes.func.isRequired
+	pushAction: PropTypes.func.isRequired,
+	resetAction: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -138,8 +150,11 @@ export default connect(
 		backAction: () => {
 			dispatch(navigatePop())
 		},
-		pushAction: (key, type) => {
-			dispatch(navigatePush(key, type))
+		pushAction: (key, next) => {
+			dispatch(navigatePush(key, next))
+		},
+		resetAction: (routes) => {
+			dispatch(navigateReset(0, routes))
 		}
 	})
 )(AppContainer)

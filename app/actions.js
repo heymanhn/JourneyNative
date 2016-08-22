@@ -11,12 +11,12 @@ export const LOGIN_SAVE_PASSWORD = 'LOGIN_SAVE_PASSWORD'
 export const LOGIN_SUBMIT = 'LOGIN_SUBMIT'
 
 // Navigation Action Creators
-export function navigatePush(key, type) {
+export function navigatePush(key, next) {
 	return {
 		type: NAV_PUSH,
 		state: {
 			key,
-			type
+			next
 		}
 	}
 }
