@@ -31,6 +31,7 @@ class LoginPasswordScreen extends Component {
             style={styles.inputField}
             autoCapitalize='none'
             autoCorrect={false}
+            autoFocus={true}
             onChangeText={(text) => this.props.onEnterPassword({text})}
             onSubmitEditing={this.props.onSubmitPress}
             returnKeyType='go'

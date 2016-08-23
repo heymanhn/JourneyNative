@@ -23,6 +23,7 @@ class LoginEmailScreen extends Component {
             style={styles.inputField}
             autoCapitalize='none'
             autoCorrect={false}
+            autoFocus={true}
             keyboardType='email-address'
             onChangeText={(text) => this.props.onEnterEmail(text)}
             onSubmitEditing={this.props.onSubmitPress}
