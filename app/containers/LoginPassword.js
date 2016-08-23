@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import LoginPasswordScreen from '../components/LoginPasswordScreen'
-import { loginSavePassword, loginSubmit, navigateReset } from '../actions'
+import { apiLogin, loginSavePassword, navigateReset } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(loginSavePassword(password))
 		},
 		onSubmitPress: () => {
-			dispatch(loginSubmit())
+			dispatch(apiLogin())
 			dispatch(navigateReset(0, [{ key: 'Trips' }]))
 		}
 	}

@@ -17,7 +17,7 @@ import {
   NAV_RESET,
   LOGIN_SAVE_EMAIL,
   LOGIN_SAVE_PASSWORD,
-  LOGIN_SUBMIT,
+  API_LOGIN_REQUEST,
   LOGOUT
 } from './actions'
 
@@ -55,6 +55,8 @@ function authentication(state = {}, action) {
       return { ...state, email: action.email }
     case LOGIN_SAVE_PASSWORD:
       return { ...state, password: action.password }
+    case API_LOGIN_REQUEST:
+      return state
     case LOGOUT:
       return {}
   }

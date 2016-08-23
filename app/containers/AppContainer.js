@@ -15,7 +15,7 @@ import Intro from './Intro'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
 import Trips from './Trips'
-import { navigatePush, navigatePop, navigateReset } from '../actions'
+import { apiLogin, navigatePush, navigatePop } from '../actions'
 
 const {
 	CardStack: NavigationCardStack,
@@ -90,6 +90,7 @@ class AppContainer extends Component {
 				case 'LoginPassword':
 					return this.props.pushAction(next, 'Trips')
 				case 'Trips':
+					this.props.loginAction()
 					return this.props.pushAction(next)
 				default:
 					return null
@@ -113,6 +114,7 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
 	navigationState: PropTypes.object,
 	backAction: PropTypes.func.isRequired,
+	loginAction: PropTypes.func.isRequired,
 	pushAction: PropTypes.func.isRequired
 }
 
@@ -140,6 +142,9 @@ export default connect(
 	dispatch => ({
 		backAction: () => {
 			dispatch(navigatePop())
+		},
+		loginAction: () => {
+			dispatch(apiLogin())
 		},
 		pushAction: (key, next) => {
 			dispatch(navigatePush(key, next))

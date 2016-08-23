@@ -1,17 +1,27 @@
 'use strict'
 
-// Action Types
+/*
+ * Action Types
+ */
+
+// Navigation
 export const NAV_PUSH = 'NAV_PUSH'
 export const NAV_POP = 'NAV_POP'
 export const NAV_JUMP_TO_KEY = 'NAV_JUMP_TO_KEY'
 export const NAV_JUMP_TO_INDEX = 'NAV_JUMP_TO_INDEX'
 export const NAV_RESET = 'NAV_RESET'
+
+// Authentication
 export const LOGIN_SAVE_EMAIL = 'LOGIN_SAVE_EMAIL'
 export const LOGIN_SAVE_PASSWORD = 'LOGIN_SAVE_PASSWORD'
-export const LOGIN_SUBMIT = 'LOGIN_SUBMIT'
+export const API_LOGIN_REQUEST = 'API_LOGIN_REQUEST'
 export const LOGOUT = 'LOGOUT'
 
-// Navigation Action Creators
+/*
+ * Action Creators
+ */
+
+// Navigation
 export function navigatePush(key, next) {
 	return {
 		type: NAV_PUSH,
@@ -50,7 +60,7 @@ export function navigateReset(index, routes) {
 	}
 }
 
-// Authentication Action Creators
+// Authentication
 export function loginSaveEmail(email) {
   return {
     type: LOGIN_SAVE_EMAIL,
@@ -65,10 +75,9 @@ export function loginSavePassword(pw) {
   }
 }
 
-export function loginSubmit(password) {
+export function apiLogin() {
   return {
-    type: LOGIN_SUBMIT,
-    password
+    type: API_LOGIN_REQUEST
   }
 }
 
