@@ -79,6 +79,7 @@ class AppContainer extends Component {
   }
 
   renderNextButtonComponent(props) {
+    const dismissKeyboard = require('dismissKeyboard');
     let next = props.scene.route.next
     let { authState } = this.props
 
@@ -91,6 +92,7 @@ class AppContainer extends Component {
         case 'LoginPassword':
           return this.props.pushAction(next, 'Trips')
         case 'Trips':
+          dismissKeyboard()
           return this.props.loginAction()
         default:
           return null
