@@ -123,7 +123,7 @@ export function apiLogin() {
     }
 
     let handleErrors = (response) => {
-      return response.ok ? response : Promise.reject(response.statusText)
+      return response.ok ? response : response.json().then(Promise.reject)
     }
 
     fetch(login.route, opts)
