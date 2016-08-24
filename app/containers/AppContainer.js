@@ -2,6 +2,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import {
+  ActivityIndicator,
   Image,
   NavigationExperimental,
   StyleSheet,
@@ -87,6 +88,16 @@ class AppContainer extends Component {
       return null
     }
 
+    if (authState.isFetching) {
+      return (
+        <ActivityIndicator
+          animating={true}
+          style={styles.activityIndicator}
+          size={'small'}
+        />
+      )
+    }
+
     let onPressAction = () => {
       switch (next) {
         case 'LoginPassword':
@@ -135,6 +146,11 @@ const styles = StyleSheet.create({
   nextButton: {
     fontSize: 16,
     margin: 10
+  },
+  activityIndicator: {
+    height: 20,
+    marginRight: 10,
+    marginTop: 8
   }
 })
 
