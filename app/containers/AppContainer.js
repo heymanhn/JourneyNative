@@ -7,8 +7,7 @@ import {
   NavigationExperimental,
   StyleSheet,
   Text,
-  TouchableHighlight,
-  View
+  TouchableHighlight
 } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -20,7 +19,6 @@ import { apiLogin, navigatePush, navigatePop } from '../actions'
 
 const {
   CardStack: NavigationCardStack,
-  Card: NavigationCard,
   Header: NavigationHeader
 } = NavigationExperimental
 
@@ -105,8 +103,6 @@ class AppContainer extends Component {
         case 'Trips':
           dismissKeyboard()
           return this.props.loginAction()
-        default:
-          return null
       }
     }
 
