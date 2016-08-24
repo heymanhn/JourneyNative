@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,6 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import Button from 'react-native-button'
 
 class TripsScreen extends Component {
   render() {
@@ -19,7 +18,7 @@ class TripsScreen extends Component {
             Trips
           </Text>
           <Text style={styles.label}>
-            Hello, {this.props.user.username} !
+            Hello, {this.props.user && this.props.user.username} !
           </Text>
           <TouchableHighlight
             onPress={this.props.onLogoutPress}
@@ -32,6 +31,11 @@ class TripsScreen extends Component {
       </View>
     )
   }
+}
+
+TripsScreen.propTypes = {
+  user: PropTypes.object,
+  onLogoutPress: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

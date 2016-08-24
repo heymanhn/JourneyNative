@@ -3,29 +3,28 @@
 import React, { Component, PropTypes } from 'react'
 import ScreenWithInput from './ScreenWithInput'
 
-class LoginEmailScreen extends Component {
+class SignupNameScreen extends Component {
   render() {
     const inputProps = {
-      keyboardType: 'email-address',
       returnKeyType: 'next',
-      onChangeText: (text) => { this.props.onEnterEmail(text) },
+      onChangeText: (text) => { this.props.onEnterName(text) },
       onSubmitEditing: this.props.onSubmitPress,
-      defaultValue: this.props.email
+      defaultValue: this.props.name
     }
 
     return (
       <ScreenWithInput
-        label="What's your email?"
+        label="What's your name?"
         inputProps={inputProps}
       />
     )
   }
 }
 
-LoginEmailScreen.propTypes = {
-  email: PropTypes.string,
-  onEnterEmail: PropTypes.func.isRequired,
+SignupNameScreen.propTypes = {
+  name: PropTypes.string,
+  onEnterName: PropTypes.func.isRequired,
   onSubmitPress: PropTypes.func.isRequired
 }
 
-export default LoginEmailScreen
+export default SignupNameScreen

@@ -21,12 +21,16 @@ class IntroScreen extends Component {
           </Text>
         </View>
         <View style={styles.buttons}>
-          <Button style={styles.button}>
+          <Button
+            style={styles.button}
+            onPress={this.props.onSignupPress}
+          >
             Sign up
           </Button>
           <Button
             style={styles.button}
-            onPress={this.props.onLoginPress}>
+            onPress={this.props.onLoginPress}
+          >
             Log in
           </Button>
         </View>
@@ -36,7 +40,8 @@ class IntroScreen extends Component {
 }
 
 IntroScreen.propTypes = {
-  onLoginPress: PropTypes.func.isRequired
+  onLoginPress: PropTypes.func.isRequired,
+  onSignupPress: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

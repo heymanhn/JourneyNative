@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   StyleSheet,
   Text,
@@ -32,6 +32,12 @@ class ScreenWithInput extends Component {
       </View>
     )
   }
+}
+
+ScreenWithInput.propTypes = {
+  error: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  inputProps: PropTypes.object
 }
 
 const styles = StyleSheet.create({

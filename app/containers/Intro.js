@@ -9,6 +9,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onSignupPress: () => {
+      dispatch(navigatePush('SignupName'))
+    },
     onLoginPress: () => {
       dispatch(navigatePush('LoginEmail'))
     }

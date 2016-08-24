@@ -6,7 +6,7 @@ import { initialNavState } from '../constants'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.authState.user ? state.authState.user : ''
+    user: state.authState.user
   }
 }
 

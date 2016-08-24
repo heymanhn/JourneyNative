@@ -14,6 +14,9 @@ import { connect } from 'react-redux'
 import Intro from './Intro'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
+import SignupName from './SignupName'
+import SignupEmail from './SignupEmail'
+import SignupPassword from './SignupPassword'
 import Trips from './Trips'
 import { apiLogin, navigatePush, navigatePop } from '../actions'
 import { nextRoutes } from '../constants'
@@ -54,6 +57,12 @@ class AppContainer extends Component {
         return <LoginEmail />
       case 'LoginPassword':
         return <LoginPassword />
+      case 'SignupName':
+        return <SignupName />
+      case 'SignupEmail':
+        return <SignupEmail />
+      case 'SignupPassword':
+        return <SignupPassword />
       case 'Trips':
         return <Trips />
     }
@@ -102,6 +111,8 @@ class AppContainer extends Component {
         case 'Trips':
           dismissKeyboard()
           return this.props.loginAction()
+
+          // TODO: Need to distinguish between logging in and signing up
         default:
           return this.props.pushAction(next)
       }
