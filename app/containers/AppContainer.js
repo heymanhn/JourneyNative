@@ -80,6 +80,7 @@ class AppContainer extends Component {
 
 	renderNextButtonComponent(props) {
 		let next = props.scene.route.next
+		let { authState } = this.props
 
 		if (!next) {
 			return null
@@ -90,8 +91,7 @@ class AppContainer extends Component {
 				case 'LoginPassword':
 					return this.props.pushAction(next, 'Trips')
 				case 'Trips':
-					this.props.loginAction()
-					return this.props.pushAction(next)
+					return this.props.loginAction()
 				default:
 					return null
 			}
@@ -113,6 +113,7 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
 	navigationState: PropTypes.object,
+	authState: PropTypes.object,
 	backAction: PropTypes.func.isRequired,
 	loginAction: PropTypes.func.isRequired,
 	pushAction: PropTypes.func.isRequired
@@ -137,7 +138,8 @@ const styles = StyleSheet.create({
 
 export default connect(
 	state => ({
-		navigationState: state.navigationState
+		navigationState: state.navigationState,
+		authState: state.authState
 	}),
 	dispatch => ({
 		backAction: () => {

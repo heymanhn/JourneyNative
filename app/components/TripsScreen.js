@@ -18,6 +18,9 @@ class TripsScreen extends Component {
           <Text style={styles.label}>
             Trips
           </Text>
+          <Text style={styles.label}>
+            Hello, {this.props.user.username} !
+          </Text>
           <TouchableHighlight
             onPress={this.props.onLogoutPress}
           >

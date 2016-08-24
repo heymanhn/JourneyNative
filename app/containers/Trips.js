@@ -5,19 +5,21 @@ import { logout, navigateReset } from '../actions'
 import { initialNavState } from '../constants'
 
 const mapStateToProps = (state) => {
-	return {}
+  return {
+    user: state.authState.user ? state.authState.user : ''
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		onLogoutPress: () => {
-			dispatch(logout())
-			dispatch(navigateReset(initialNavState.index, initialNavState.routes))
-		}
-	}
+  return {
+    onLogoutPress: () => {
+      dispatch(logout())
+      dispatch(navigateReset(initialNavState.index, initialNavState.routes))
+    }
+  }
 }
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TripsScreen)

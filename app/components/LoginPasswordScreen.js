@@ -32,12 +32,14 @@ class LoginPasswordScreen extends Component {
             autoCapitalize='none'
             autoCorrect={false}
             autoFocus={true}
-            onChangeText={(text) => this.props.onEnterPassword({text})}
+            onChangeText={(text) => this.props.onEnterPassword(text)}
             onSubmitEditing={this.props.onSubmitPress}
             returnKeyType='go'
             secureTextEntry={true}
-            value={this.props.password}
           />
+          <Text style={styles.errorMessage}>
+            {this.props.error}
+          </Text>
         </View>
       </View>
     )
@@ -75,6 +77,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
     padding:5
+  },
+  errorMessage: {
+    fontSize: 16,
+    margin: 10,
+    textAlign: 'center'
   }
 })
 

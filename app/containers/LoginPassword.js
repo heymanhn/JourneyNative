@@ -1,27 +1,26 @@
 import { connect } from 'react-redux'
 
 import LoginPasswordScreen from '../components/LoginPasswordScreen'
-import { apiLogin, loginSavePassword, navigateReset } from '../actions'
+import { apiLogin, loginSavePassword } from '../actions'
 
 const mapStateToProps = (state) => {
-	return {
-		password: state.authentication.password
-	}
+  return {
+    error: state.authState.error ? state.authState.error.message : ''
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		onEnterPassword: (password) => {
-			dispatch(loginSavePassword(password))
-		},
-		onSubmitPress: () => {
-			dispatch(apiLogin())
-			dispatch(navigateReset(0, [{ key: 'Trips' }]))
-		}
-	}
+  return {
+    onEnterPassword: (password) => {
+      dispatch(loginSavePassword(password))
+    },
+    onSubmitPress: () => {
+      dispatch(apiLogin())
+    }
+  }
 }
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(LoginPasswordScreen)
