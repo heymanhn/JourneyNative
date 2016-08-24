@@ -36,7 +36,7 @@ class IntroScreen extends Component {
 }
 
 IntroScreen.propTypes = {
-	onLoginPress: PropTypes.func.isRequired
+  onLoginPress: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

@@ -4,18 +4,18 @@ import IntroScreen from '../components/IntroScreen'
 import { navigatePush } from '../actions'
 
 const mapStateToProps = (state) => {
-	return {}
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		onLoginPress: () => {
-			dispatch(navigatePush('LoginEmail', 'LoginPassword'))
-		}
-	}
+  return {
+    onLoginPress: () => {
+      dispatch(navigatePush('LoginEmail', 'LoginPassword'))
+    }
+  }
 }
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(IntroScreen)
