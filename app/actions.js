@@ -157,28 +157,28 @@ export function logout() {
  */
 
 // Authentication
+let optsTemplate = {
+  mode: 'cors',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+}
+
+let handleErrors = (response) => {
+  return response.ok ? response : response.json().then(Promise.reject)
+}
 
 export function apiLogin() {
   return (dispatch, getState) => {
     dispatch(apiLoginRequest())
 
     let { email, password } = getState().authState
-    const login = journeyAPI.login
-    const opts = {
-      method: login.method,
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }
+    let opts = {...optsTemplate}
+    opts.method = journeyAPI.login.method
+    opts.body = JSON.stringify({ email, password })
 
-    let handleErrors = (response) => {
-      return response.ok ? response : response.json().then(Promise.reject)
-    }
-
-    fetch(login.route, opts)
+    fetch(journeyAPI.login.route, opts)
       .then(handleErrors)
       .then(response => response.json())
       .then(json => { dispatch(apiLoginSuccess(json)) })
@@ -191,26 +191,15 @@ export function apiSignup() {
     dispatch(apiSignupRequest())
 
     let { newName, newEmail, newPassword } = getState().authState
-    const signup = journeyAPI.signup
-    const opts = {
-      method: signup.method,
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: newName,
-        email: newEmail,
-        password: newPassword
-      })
-    }
+    let opts = {...optsTemplate}
+    opts.method = journeyAPI.signup.method
+    opts.body = JSON.stringify({
+      name: newName,
+      email: newEmail,
+      password: newPassword
+    })
 
-    let handleErrors = (response) => {
-      return response.ok ? response : response.json().then(Promise.reject)
-    }
-
-    fetch(signup.route, opts)
+    fetch(journeyAPI.signup.route, opts)
       .then(handleErrors)
       .then(response => response.json())
       .then(json => { dispatch(apiSignupSuccess(json)) })
