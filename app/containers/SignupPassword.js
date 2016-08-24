@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import SignupPasswordScreen from '../components/SignupPasswordScreen'
-import { signupSavePassword, navigatePush } from '../actions'
+import { apiSignup, signupSavePassword, navigatePush } from '../actions'
 
 const mapStateToProps = (state) => {
   return {

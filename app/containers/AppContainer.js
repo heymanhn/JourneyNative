@@ -18,7 +18,7 @@ import SignupName from './SignupName'
 import SignupEmail from './SignupEmail'
 import SignupPassword from './SignupPassword'
 import Trips from './Trips'
-import { apiLogin, navigatePush, navigatePop } from '../actions'
+import { apiLogin, apiSignup, navigatePush, navigatePop } from '../actions'
 import { nextRoutes } from '../constants'
 
 const {
@@ -89,7 +89,8 @@ class AppContainer extends Component {
 
   renderNextButtonComponent(props) {
     const dismissKeyboard = require('dismissKeyboard');
-    let next = nextRoutes[props.scene.route.key]
+    const currentScene = props.scene.route.key
+    let next = nextRoutes[currentScene]
     let { authState } = this.props
 
     if (!next) {
@@ -110,9 +111,13 @@ class AppContainer extends Component {
       switch (next) {
         case 'Trips':
           dismissKeyboard()
-          return this.props.loginAction()
-
-          // TODO: Need to distinguish between logging in and signing up
+          if (currentScene === 'LoginPassword') {
+            return this.props.loginAction()
+          } else if (currentScene === 'SignupPassword') {
+            return this.props.signupAction()
+          } else {
+            return null
+          }
         default:
           return this.props.pushAction(next)
       }
@@ -137,6 +142,7 @@ AppContainer.propTypes = {
   authState: PropTypes.object,
   backAction: PropTypes.func.isRequired,
   loginAction: PropTypes.func.isRequired,
+  signupAction: PropTypes.func.isRequired,
   pushAction: PropTypes.func.isRequired
 }
 
@@ -174,8 +180,11 @@ export default connect(
     loginAction: () => {
       dispatch(apiLogin())
     },
-    pushAction: (key, next) => {
-      dispatch(navigatePush(key, next))
+    signupAction: () => {
+      dispatch(apiSignup())
+    },
+    pushAction: (key) => {
+      dispatch(navigatePush(key))
     }
   })
 )(AppContainer)

@@ -23,6 +23,9 @@ import {
   API_LOGIN_REQUEST,
   API_LOGIN_SUCCESS,
   API_LOGIN_FAILURE,
+  API_SIGNUP_REQUEST,
+  API_SIGNUP_SUCCESS,
+  API_SIGNUP_FAILURE,
   LOGOUT
 } from './actions'
 
@@ -50,6 +53,7 @@ function navigationState(state = initialNavState, action) {
       return NavigationStateUtils.reset(state, action.routes, action.index)
 
     case API_LOGIN_SUCCESS:
+    case API_SIGNUP_SUCCESS:
       return NavigationStateUtils.push(state, { key: 'Trips' })
 
     default:
@@ -70,11 +74,13 @@ function authState(state = initialAuthState, action) {
     case SIGNUP_SAVE_PASSWORD:
       return { ...state, newPassword: action.password }
     case API_LOGIN_REQUEST:
+    case API_SIGNUP_REQUEST:
       return {
         ...state,
         isFetching: true
       }
     case API_LOGIN_SUCCESS:
+    case API_SIGNUP_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -82,10 +88,12 @@ function authState(state = initialAuthState, action) {
         token: action.token
       }
     case API_LOGIN_FAILURE:
+    case API_SIGNUP_FAILURE:
       return {
         ...state,
         isFetching: false,
         password: '',
+        newPassword: '',
         error: action.error
       }
     case LOGOUT:

@@ -21,6 +21,9 @@ export const SIGNUP_SAVE_PASSWORD = 'SIGNUP_SAVE_PASSWORD'
 export const API_LOGIN_REQUEST = 'API_LOGIN_REQUEST'
 export const API_LOGIN_SUCCESS = 'API_LOGIN_SUCCESS'
 export const API_LOGIN_FAILURE = 'API_LOGIN_FAILURE'
+export const API_SIGNUP_REQUEST = 'API_SIGNUP_REQUEST'
+export const API_SIGNUP_SUCCESS = 'API_SIGNUP_SUCCESS'
+export const API_SIGNUP_FAILURE = 'API_SIGNUP_FAILURE'
 export const LOGOUT = 'LOGOUT'
 
 /*
@@ -122,13 +125,39 @@ export function apiLoginFailure(error) {
   }
 }
 
+export function apiSignupRequest() {
+  return {
+    type: API_SIGNUP_REQUEST
+  }
+}
+
+export function apiSignupSuccess(json) {
+  return {
+    type: API_SIGNUP_SUCCESS,
+    user: json.user,
+    token: json.token
+  }
+}
+
+export function apiSignupFailure(error) {
+  return {
+    type: API_SIGNUP_FAILURE,
+    error
+  }
+}
+
 export function logout() {
   return {
     type: LOGOUT
   }
 }
 
-// Authentication thunks
+/*
+ * Action Creator thunks
+ */
+
+// Authentication
+
 export function apiLogin() {
   return (dispatch, getState) => {
     dispatch(apiLoginRequest())
@@ -154,5 +183,37 @@ export function apiLogin() {
       .then(response => response.json())
       .then(json => { dispatch(apiLoginSuccess(json)) })
       .catch(error => { dispatch(apiLoginFailure(error)) })
+  }
+}
+
+export function apiSignup() {
+  return (dispatch, getState) => {
+    dispatch(apiSignupRequest())
+
+    let { newName, newEmail, newPassword } = getState().authState
+    const signup = journeyAPI.signup
+    const opts = {
+      method: signup.method,
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newName,
+        email: newEmail,
+        password: newPassword
+      })
+    }
+
+    let handleErrors = (response) => {
+      return response.ok ? response : response.json().then(Promise.reject)
+    }
+
+    fetch(signup.route, opts)
+      .then(handleErrors)
+      .then(response => response.json())
+      .then(json => { dispatch(apiSignupSuccess(json)) })
+      .catch(error => { dispatch(apiSignupFailure(error)) })
   }
 }

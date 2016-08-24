@@ -8,6 +8,10 @@ export const journeyAPI = {
   login: {
     method: 'POST',
     route: journeyAPIHost + '/auth/login'
+  },
+  signup: {
+    method: 'POST',
+    route: journeyAPIHost + '/users'
   }
 }
 

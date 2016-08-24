@@ -18,7 +18,7 @@ class TripsScreen extends Component {
             Trips
           </Text>
           <Text style={styles.label}>
-            Hello, {this.props.user && this.props.user.username} !
+            Hello, {this.props.user && this.props.user.name} !
           </Text>
           <TouchableHighlight
             onPress={this.props.onLogoutPress}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     color: '#333333',
-    fontWeight: '300',
+    fontWeight: '400',
     marginBottom: 20
   }
 })
