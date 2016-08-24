@@ -63,6 +63,9 @@ function navigationState(state = initialNavState, action) {
 
 function authState(state = initialAuthState, action) {
   switch (action.type) {
+    case NAV_POP:
+      delete state.error
+      return state
     case LOGIN_SAVE_EMAIL:
       return { ...state, email: action.email }
     case LOGIN_SAVE_PASSWORD:
