@@ -25,12 +25,11 @@ export const LOGOUT = 'LOGOUT'
  */
 
 // Navigation
-export function navigatePush(key, next) {
+export function navigatePush(key) {
   return {
     type: NAV_PUSH,
     state: {
-      key,
-      next
+      key
     }
   }
 }

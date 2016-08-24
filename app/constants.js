@@ -21,3 +21,14 @@ export const initialNavState = {
 export const initialAuthState = {
   isFetching: false
 }
+
+export const nextRoutes = {
+  // Login routes
+  'LoginEmail': 'LoginPassword',
+  'LoginPassword': 'Trips',
+
+  // Signup routes
+  'SignupName': 'SignupEmail',
+  'SignupEmail': 'SignupPassword',
+  'SignupPassword': 'Trips'
+}

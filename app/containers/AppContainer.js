@@ -16,6 +16,7 @@ import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
 import Trips from './Trips'
 import { apiLogin, navigatePush, navigatePop } from '../actions'
+import { nextRoutes } from '../constants'
 
 const {
   CardStack: NavigationCardStack,
@@ -79,7 +80,7 @@ class AppContainer extends Component {
 
   renderNextButtonComponent(props) {
     const dismissKeyboard = require('dismissKeyboard');
-    let next = props.scene.route.next
+    let next = nextRoutes[props.scene.route.key]
     let { authState } = this.props
 
     if (!next) {
@@ -98,11 +99,11 @@ class AppContainer extends Component {
 
     let onPressAction = () => {
       switch (next) {
-        case 'LoginPassword':
-          return this.props.pushAction(next, 'Trips')
         case 'Trips':
           dismissKeyboard()
           return this.props.loginAction()
+        default:
+          return this.props.pushAction(next)
       }
     }
 
