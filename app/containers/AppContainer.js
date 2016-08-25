@@ -28,11 +28,12 @@ const {
 
 class AppContainer extends Component {
   render() {
-    let { navigationState } = this.props
+    let { backAction, navigationState } = this.props
 
     return (
       <NavigationCardStack
         navigationState={navigationState}
+        onNavigateBack={backAction}
         renderOverlay={props => (
           <NavigationHeader
             {...props}
