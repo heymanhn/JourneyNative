@@ -6,6 +6,7 @@ import ScreenWithInput from './ScreenWithInput'
 class SignupNameScreen extends Component {
   render() {
     const inputProps = {
+      autoCapitalize: 'words',
       returnKeyType: 'next',
       onChangeText: (text) => { this.props.onEnterName(text) },
       onSubmitEditing: this.props.onSubmitPress,
