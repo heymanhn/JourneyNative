@@ -78,12 +78,26 @@ function authState(state = initialAuthState, action) {
       return { ...state, newPassword: action.password }
     case API_LOGIN_REQUEST:
     case API_SIGNUP_REQUEST:
+      delete state.error
       return {
         ...state,
         isFetching: true
       }
     case API_LOGIN_SUCCESS:
+      delete state.error
+      delete state.email
+      delete state.password
+      return {
+        ...state,
+        isFetching: false,
+        user: action.user,
+        token: action.token
+      }
     case API_SIGNUP_SUCCESS:
+      delete state.error
+      delete state.newName
+      delete state.newEmail
+      delete state.newPassword
       return {
         ...state,
         isFetching: false,
@@ -91,17 +105,23 @@ function authState(state = initialAuthState, action) {
         token: action.token
       }
     case API_LOGIN_FAILURE:
-    case API_SIGNUP_FAILURE:
+      delete state.password
       return {
         ...state,
         isFetching: false,
-        password: '',
-        newPassword: '',
+        error: action.error
+      }
+    case API_SIGNUP_FAILURE:
+      delete state.newPassword
+      return {
+        ...state,
+        isFetching: false,
         error: action.error
       }
     case LOGOUT:
       return initialAuthState
   }
+
   return state
 }
 
