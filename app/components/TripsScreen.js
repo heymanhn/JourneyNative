@@ -10,6 +10,10 @@ import {
 } from 'react-native'
 
 class TripsScreen extends Component {
+  componentWillMount() {
+    this.props.resetViewsOnLoad()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,7 +39,8 @@ class TripsScreen extends Component {
 
 TripsScreen.propTypes = {
   user: PropTypes.object,
-  onLogoutPress: PropTypes.func.isRequired
+  onLogoutPress: PropTypes.func.isRequired,
+  resetViewsOnLoad: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
