@@ -14,8 +14,12 @@ import { connect } from 'react-redux'
 import Intro from './Intro'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
+import SignupName from './SignupName'
+import SignupEmail from './SignupEmail'
+import SignupPassword from './SignupPassword'
 import Trips from './Trips'
-import { apiLogin, navigatePush, navigatePop } from '../actions'
+import { apiLogin, apiSignup, navigatePush, navigatePop } from '../actions'
+import { nextRoutes } from '../constants'
 
 const {
   CardStack: NavigationCardStack,
@@ -24,10 +28,15 @@ const {
 
 class AppContainer extends Component {
   render() {
-    let { navigationState } = this.props
+    let { backAction, navigationState } = this.props
+    let newProps = {}
+    if (this.shouldRenderBack()) {
+      newProps.onNavigateBack = backAction
+    }
 
     return (
       <NavigationCardStack
+        {...newProps}
         navigationState={navigationState}
         renderOverlay={props => (
           <NavigationHeader
@@ -43,6 +52,14 @@ class AppContainer extends Component {
     )
   }
 
+  shouldRenderBack() {
+    const { navigationState } = this.props
+    const index = navigationState.index
+    const key = navigationState.routes[index].key
+
+    return !(index === 0 || key === 'Trips')
+  }
+
   renderScene({ scene }) {
     const { route } = scene
 
@@ -53,13 +70,19 @@ class AppContainer extends Component {
         return <LoginEmail />
       case 'LoginPassword':
         return <LoginPassword />
+      case 'SignupName':
+        return <SignupName />
+      case 'SignupEmail':
+        return <SignupEmail />
+      case 'SignupPassword':
+        return <SignupPassword />
       case 'Trips':
         return <Trips />
     }
   }
 
   renderBackButtonComponent(props) {
-    if (props.scene.index === 0 || props.scene.route.key === 'Trips') {
+    if (!this.shouldRenderBack()) {
       return null
     }
 
@@ -78,8 +101,9 @@ class AppContainer extends Component {
   }
 
   renderNextButtonComponent(props) {
-    const dismissKeyboard = require('dismissKeyboard');
-    let next = props.scene.route.next
+    const dismissKeyboard = require('dismissKeyboard')
+    const currentScene = props.scene.route.key
+    let next = nextRoutes[currentScene]
     let { authState } = this.props
 
     if (!next) {
@@ -98,11 +122,17 @@ class AppContainer extends Component {
 
     let onPressAction = () => {
       switch (next) {
-        case 'LoginPassword':
-          return this.props.pushAction(next, 'Trips')
         case 'Trips':
           dismissKeyboard()
-          return this.props.loginAction()
+          if (currentScene === 'LoginPassword') {
+            return this.props.loginAction()
+          } else if (currentScene === 'SignupPassword') {
+            return this.props.signupAction()
+          } else {
+            return null
+          }
+        default:
+          return this.props.pushAction(next)
       }
     }
 
@@ -125,6 +155,7 @@ AppContainer.propTypes = {
   authState: PropTypes.object,
   backAction: PropTypes.func.isRequired,
   loginAction: PropTypes.func.isRequired,
+  signupAction: PropTypes.func.isRequired,
   pushAction: PropTypes.func.isRequired
 }
 
@@ -162,8 +193,11 @@ export default connect(
     loginAction: () => {
       dispatch(apiLogin())
     },
-    pushAction: (key, next) => {
-      dispatch(navigatePush(key, next))
+    signupAction: () => {
+      dispatch(apiSignup())
+    },
+    pushAction: (key) => {
+      dispatch(navigatePush(key))
     }
   })
 )(AppContainer)

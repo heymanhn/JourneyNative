@@ -6,15 +6,18 @@ import { initialNavState } from '../constants'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.authState.user ? state.authState.user : ''
+    user: state.authState.user
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogoutPress: () => {
-      dispatch(logout())
       dispatch(navigateReset(initialNavState.index, initialNavState.routes))
+    },
+    resetViewsOnLoad: () => {
+      dispatch(navigateReset(0, [{ key: 'Trips'}]))
+      dispatch(logout())
     }
   }
 }

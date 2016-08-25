@@ -8,16 +8,31 @@ export const journeyAPI = {
   login: {
     method: 'POST',
     route: journeyAPIHost + '/auth/login'
+  },
+  signup: {
+    method: 'POST',
+    route: journeyAPIHost + '/users'
   }
 }
 
 export const initialNavState = {
   index: 0,
   routes: [
-    { key: 'Intro', type: 'screen' }
+    { key: 'Intro'}
   ]
 }
 
 export const initialAuthState = {
   isFetching: false
+}
+
+export const nextRoutes = {
+  // Login routes
+  'LoginEmail': 'LoginPassword',
+  'LoginPassword': 'Trips',
+
+  // Signup routes
+  'SignupName': 'SignupEmail',
+  'SignupEmail': 'SignupPassword',
+  'SignupPassword': 'Trips'
 }

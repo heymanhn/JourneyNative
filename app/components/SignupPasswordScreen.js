@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react'
 import ScreenWithInput from './ScreenWithInput'
 
-class LoginPasswordScreen extends Component {
+class SignupPasswordScreen extends Component {
   render() {
     const inputProps = {
       returnKeyType: 'go',
@@ -15,17 +15,17 @@ class LoginPasswordScreen extends Component {
     return (
       <ScreenWithInput
         error={this.props.error}
-        label="What's your password?"
+        label="Enter a password!"
         inputProps={inputProps}
       />
     )
   }
 }
 
-LoginPasswordScreen.propTypes = {
+SignupPasswordScreen.propTypes = {
   error: PropTypes.string,
   onEnterPassword: PropTypes.func.isRequired,
   onSubmitPress: PropTypes.func.isRequired
 }
 
-export default LoginPasswordScreen
+export default SignupPasswordScreen
