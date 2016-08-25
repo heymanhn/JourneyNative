@@ -89,7 +89,7 @@ class AppContainer extends Component {
   }
 
   renderNextButtonComponent(props) {
-    const dismissKeyboard = require('dismissKeyboard');
+    const dismissKeyboard = require('dismissKeyboard')
     const currentScene = props.scene.route.key
     let next = nextRoutes[currentScene]
     let { authState } = this.props

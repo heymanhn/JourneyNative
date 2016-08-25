@@ -17,10 +17,26 @@ const store = compose(
   ),
   autoRehydrate()
 )(createStore)(reducers)
-persistStore(store, { storage: AsyncStorage })
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = { rehydrated: false }
+  }
+
+  // Moving the persistStore() call to this event handler to prevent the root
+  // view from loading until after the store has been rehydrated
+  componentWillMount() {
+    persistStore(store, { storage: AsyncStorage }, () => {
+      this.setState({ rehydrated: true })
+    })
+  }
+
   render() {
+    if (!this.state.rehydrated) {
+      return null;
+    }
+
     return (
       <Provider store={store}>
         <AppContainer />
