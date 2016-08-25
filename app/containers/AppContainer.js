@@ -28,12 +28,12 @@ const {
 
 class AppContainer extends Component {
   render() {
-    let { backAction, navigationState } = this.props
+    let { navigationState } = this.props
 
     return (
       <NavigationCardStack
         navigationState={navigationState}
-        onNavigateBack={backAction}
+        onNavigateBack={this.onNavigateBack.bind(this)}
         renderOverlay={props => (
           <NavigationHeader
             {...props}
@@ -46,6 +46,14 @@ class AppContainer extends Component {
         style={styles.container}
       />
     )
+  }
+
+  onNavigateBack() {
+    const { navigationState } = this.props
+    const index = navigationState.index
+    const key = navigationState.routes[index].key
+
+    return !(index === 0 || key === 'Trips')
   }
 
   renderScene({ scene }) {
@@ -70,7 +78,7 @@ class AppContainer extends Component {
   }
 
   renderBackButtonComponent(props) {
-    if (props.scene.index === 0 || props.scene.route.key === 'Trips') {
+    if (!this.onNavigateBack()) {
       return null
     }
 
