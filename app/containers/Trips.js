@@ -14,10 +14,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onLogoutPress: () => {
       dispatch(navigateReset(initialNavState.index, initialNavState.routes))
+      dispatch(logout())
     },
     resetViewsOnLoad: () => {
       dispatch(navigateReset(0, [{ key: 'Trips'}]))
-      dispatch(logout())
     }
   }
 }
