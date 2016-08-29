@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -8,30 +8,30 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight
-} from 'react-native'
-import { connect } from 'react-redux'
+} from 'react-native';
+import { connect } from 'react-redux';
 
-import Intro from './Intro'
-import LoginEmail from './LoginEmail'
-import LoginPassword from './LoginPassword'
-import SignupName from './SignupName'
-import SignupEmail from './SignupEmail'
-import SignupPassword from './SignupPassword'
-import Trips from './Trips'
-import { apiLogin, apiSignup, navigatePush, navigatePop } from '../actions'
-import { nextRoutes } from '../constants'
+import Intro from './Intro';
+import LoginEmail from './LoginEmail';
+import LoginPassword from './LoginPassword';
+import SignupName from './SignupName';
+import SignupEmail from './SignupEmail';
+import SignupPassword from './SignupPassword';
+import Trips from './Trips';
+import { apiLogin, apiSignup, navigatePush, navigatePop } from '../actions';
+import { nextRoutes } from '../constants';
 
 const {
   CardStack: NavigationCardStack,
   Header: NavigationHeader
-} = NavigationExperimental
+} = NavigationExperimental;
 
 class AppContainer extends Component {
   render() {
-    let { backAction, navigationState } = this.props
-    let newProps = {}
+    let { backAction, navigationState } = this.props;
+    let newProps = {};
     if (this.shouldRenderBack()) {
-      newProps.onNavigateBack = backAction
+      newProps.onNavigateBack = backAction;
     }
 
     return (
@@ -49,41 +49,41 @@ class AppContainer extends Component {
         renderScene={this.renderScene}
         style={styles.container}
       />
-    )
+    );
   }
 
   shouldRenderBack() {
-    const { navigationState } = this.props
-    const index = navigationState.index
-    const key = navigationState.routes[index].key
+    const { navigationState } = this.props;
+    const index = navigationState.index;
+    const key = navigationState.routes[index].key;
 
-    return !(index === 0 || key === 'Trips')
+    return !(index === 0 || key === 'Trips');
   }
 
   renderScene({ scene }) {
-    const { route } = scene
+    const { route } = scene;
 
     switch(route.key) {
       case 'Intro':
-        return <Intro />
+        return <Intro />;
       case 'LoginEmail':
-        return <LoginEmail />
+        return <LoginEmail />;
       case 'LoginPassword':
-        return <LoginPassword />
+        return <LoginPassword />;
       case 'SignupName':
-        return <SignupName />
+        return <SignupName />;
       case 'SignupEmail':
-        return <SignupEmail />
+        return <SignupEmail />;
       case 'SignupPassword':
-        return <SignupPassword />
+        return <SignupPassword />;
       case 'Trips':
-        return <Trips />
+        return <Trips />;
     }
   }
 
   renderBackButtonComponent(props) {
     if (!this.shouldRenderBack()) {
-      return null
+      return null;
     }
 
     return (
@@ -97,17 +97,17 @@ class AppContainer extends Component {
           style={styles.backButton}
         />
       </TouchableHighlight>
-    )
+    );
   }
 
   renderNextButtonComponent(props) {
-    const dismissKeyboard = require('dismissKeyboard')
-    const currentScene = props.scene.route.key
-    let next = nextRoutes[currentScene]
-    let { authState } = this.props
+    const dismissKeyboard = require('dismissKeyboard');
+    const currentScene = props.scene.route.key;
+    let next = nextRoutes[currentScene];
+    let { authState } = this.props;
 
     if (!next) {
-      return null
+      return null;
     }
 
     if (authState.isFetching) {
@@ -117,24 +117,24 @@ class AppContainer extends Component {
           style={styles.activityIndicator}
           size={'small'}
         />
-      )
+      );
     }
 
     let onPressAction = () => {
       switch (next) {
         case 'Trips':
-          dismissKeyboard()
+          dismissKeyboard();
           if (currentScene === 'LoginPassword') {
-            return this.props.loginAction()
+            return this.props.loginAction();
           } else if (currentScene === 'SignupPassword') {
-            return this.props.signupAction()
+            return this.props.signupAction();
           } else {
-            return null
+            return null;
           }
         default:
-          return this.props.pushAction(next)
+          return this.props.pushAction(next);
       }
-    }
+    };
 
     return (
       <TouchableHighlight
@@ -146,7 +146,7 @@ class AppContainer extends Component {
           Next
         </Text>
        </TouchableHighlight>
-    )
+    );
   }
 }
 
@@ -157,7 +157,7 @@ AppContainer.propTypes = {
   loginAction: PropTypes.func.isRequired,
   signupAction: PropTypes.func.isRequired,
   pushAction: PropTypes.func.isRequired
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 8
   }
-})
+});
 
 export default connect(
   state => ({
@@ -188,16 +188,16 @@ export default connect(
   }),
   dispatch => ({
     backAction: () => {
-      dispatch(navigatePop())
+      dispatch(navigatePop());
     },
     loginAction: () => {
-      dispatch(apiLogin())
+      dispatch(apiLogin());
     },
     signupAction: () => {
-      dispatch(apiSignup())
+      dispatch(apiSignup());
     },
     pushAction: (key) => {
-      dispatch(navigatePush(key))
+      dispatch(navigatePush(key));
     }
   })
-)(AppContainer)
+)(AppContainer);

@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
   TextInput,
   View
-} from 'react-native'
+} from 'react-native';
 
 class ScreenWithInput extends Component {
   render() {
@@ -30,7 +30,7 @@ class ScreenWithInput extends Component {
           </Text>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -38,7 +38,7 @@ ScreenWithInput.propTypes = {
   error: PropTypes.string,
   label: PropTypes.string.isRequired,
   inputProps: PropTypes.object
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     margin: 10,
     textAlign: 'center'
   }
-})
+});
 
-export default ScreenWithInput
+export default ScreenWithInput;

@@ -2,7 +2,7 @@
  * If debugging on a remote device and hostname is a numerical IP address,
  * append xip.io to the hostname. Eg. https://192.168.1.64.xip.io:3000
  */
-const journeyAPIHost = 'https://localhost:3000/v1'
+const journeyAPIHost = 'https://localhost:3000/v1';
 
 export const journeyAPI = {
   login: {
@@ -13,18 +13,18 @@ export const journeyAPI = {
     method: 'POST',
     route: journeyAPIHost + '/users'
   }
-}
+};
 
 export const initialNavState = {
   index: 0,
   routes: [
     { key: 'Intro'}
   ]
-}
+};
 
 export const initialAuthState = {
   isFetching: false
-}
+};
 
 export const nextRoutes = {
   // Login routes
@@ -35,4 +35,4 @@ export const nextRoutes = {
   'SignupName': 'SignupEmail',
   'SignupEmail': 'SignupPassword',
   'SignupPassword': 'Trips'
-}
+};

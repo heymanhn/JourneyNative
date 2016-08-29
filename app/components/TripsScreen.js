@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
   View
-} from 'react-native'
+} from 'react-native';
 
 class TripsScreen extends Component {
   componentWillMount() {
-    this.props.resetViewsOnLoad()
+    this.props.resetViewsOnLoad();
   }
 
   render() {
@@ -33,7 +33,7 @@ class TripsScreen extends Component {
           </TouchableHighlight>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -41,7 +41,7 @@ TripsScreen.propTypes = {
   user: PropTypes.object,
   onLogoutPress: PropTypes.func.isRequired,
   resetViewsOnLoad: PropTypes.func.isRequired
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginBottom: 20
   }
-})
+});
 
-export default TripsScreen
+export default TripsScreen;

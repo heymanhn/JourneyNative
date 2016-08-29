@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-import React, { Component, PropTypes } from 'react'
-import ScreenWithInput from './ScreenWithInput'
+import React, { Component, PropTypes } from 'react';
+import ScreenWithInput from './ScreenWithInput';
 
 class LoginPasswordScreen extends Component {
   render() {
@@ -10,7 +10,7 @@ class LoginPasswordScreen extends Component {
       onChangeText: (text) => { this.props.onEnterPassword(text) },
       onSubmitEditing: this.props.onSubmitPress,
       secureTextEntry: true
-    }
+    };
 
     return (
       <ScreenWithInput
@@ -18,7 +18,7 @@ class LoginPasswordScreen extends Component {
         label="What's your password?"
         inputProps={inputProps}
       />
-    )
+    );
   }
 }
 
@@ -26,6 +26,6 @@ LoginPasswordScreen.propTypes = {
   error: PropTypes.string,
   onEnterPassword: PropTypes.func.isRequired,
   onSubmitPress: PropTypes.func.isRequired
-}
+};
 
-export default LoginPasswordScreen
+export default LoginPasswordScreen;

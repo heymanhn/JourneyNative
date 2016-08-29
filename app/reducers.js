@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 import {
   NavigationExperimental
-} from 'react-native'
-import { combineReducers } from 'redux'
-import { initialNavState, initialAuthState } from './constants'
+} from 'react-native';
+import { combineReducers } from 'redux';
+import { initialNavState, initialAuthState } from './constants';
 
 const {
   StateUtils: NavigationStateUtils
-} = NavigationExperimental
+} = NavigationExperimental;
 
 import {
   NAV_PUSH,
@@ -27,107 +27,107 @@ import {
   API_SIGNUP_SUCCESS,
   API_SIGNUP_FAILURE,
   LOGOUT
-} from './actions'
+} from './actions';
 
 function navigationState(state = initialNavState, action) {
   switch (action.type) {
     case NAV_PUSH:
       if (state.routes[state.index].key === (action.state && action.state.key)) {
-        return state
+        return state;
       }
-      return NavigationStateUtils.push(state, action.state)
+      return NavigationStateUtils.push(state, action.state);
 
     case NAV_POP:
       if (state.index === 0 || state.routes.length === 1) {
-        return state
+        return state;
       }
-      return NavigationStateUtils.pop(state)
+      return NavigationStateUtils.pop(state);
 
     case NAV_JUMP_TO_KEY:
-      return NavigationStateUtils.jumpTo(state, action.key)
+      return NavigationStateUtils.jumpTo(state, action.key);
 
     case NAV_JUMP_TO_INDEX:
-      return NavigationStateUtils.jumpToIndex(state, action.index)
+      return NavigationStateUtils.jumpToIndex(state, action.index);
 
     case NAV_RESET:
-      return NavigationStateUtils.reset(state, action.routes, action.index)
+      return NavigationStateUtils.reset(state, action.routes, action.index);
 
     case API_LOGIN_SUCCESS:
     case API_SIGNUP_SUCCESS:
-      return NavigationStateUtils.push(state, { key: 'Trips' })
+      return NavigationStateUtils.push(state, { key: 'Trips' });
 
     default:
-      return state
+      return state;
   }
 }
 
 function authState(state = initialAuthState, action) {
   switch (action.type) {
     case NAV_POP:
-      delete state.error
-      return state
+      delete state.error;
+      return state;
     case LOGIN_SAVE_EMAIL:
-      return { ...state, email: action.email }
+      return { ...state, email: action.email };
     case LOGIN_SAVE_PASSWORD:
-      return { ...state, password: action.password }
+      return { ...state, password: action.password };
     case SIGNUP_SAVE_NAME:
-      return { ...state, newName: action.name }
+      return { ...state, newName: action.name };
     case SIGNUP_SAVE_EMAIL:
-      return { ...state, newEmail: action.email }
+      return { ...state, newEmail: action.email };
     case SIGNUP_SAVE_PASSWORD:
-      return { ...state, newPassword: action.password }
+      return { ...state, newPassword: action.password };
     case API_LOGIN_REQUEST:
     case API_SIGNUP_REQUEST:
-      delete state.error
+      delete state.error;
       return {
         ...state,
         isFetching: true
-      }
+      };
     case API_LOGIN_SUCCESS:
-      delete state.error
-      delete state.email
-      delete state.password
+      delete state.error;
+      delete state.email;
+      delete state.password;
       return {
         ...state,
         isFetching: false,
         user: action.user,
         token: action.token
-      }
+      };
     case API_SIGNUP_SUCCESS:
-      delete state.error
-      delete state.newName
-      delete state.newEmail
-      delete state.newPassword
+      delete state.error;
+      delete state.newName;
+      delete state.newEmail;
+      delete state.newPassword;
       return {
         ...state,
         isFetching: false,
         user: action.user,
         token: action.token
-      }
+      };
     case API_LOGIN_FAILURE:
-      delete state.password
+      delete state.password;
       return {
         ...state,
         isFetching: false,
         error: action.error
-      }
+      };
     case API_SIGNUP_FAILURE:
-      delete state.newPassword
+      delete state.newPassword;
       return {
         ...state,
         isFetching: false,
         error: action.error
-      }
+      };
     case LOGOUT:
-      return initialAuthState
+      return initialAuthState;
   }
 
-  return state
+  return state;
 }
 
 const appReducers = combineReducers({
   navigationState,
   authState
-})
+});
 
-export default appReducers
+export default appReducers;

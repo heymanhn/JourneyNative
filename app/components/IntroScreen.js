@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
   View
-} from 'react-native'
-import Button from 'react-native-button'
+} from 'react-native';
+import Button from 'react-native-button';
 
 class IntroScreen extends Component {
   render() {
@@ -35,14 +35,14 @@ class IntroScreen extends Component {
           </Button>
         </View>
       </View>
-    )
+    );
   }
 }
 
 IntroScreen.propTypes = {
   onLoginPress: PropTypes.func.isRequired,
   onSignupPress: PropTypes.func.isRequired
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 10
   }
-})
+});
 
-export default IntroScreen
+export default IntroScreen;
